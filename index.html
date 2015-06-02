@@ -46,20 +46,34 @@
   LastName: <input type="text" id="lastName" value="LastName"><br>
   UserType: <input type="text" id="userType" value="UserType"><br>
   Password: <input type="text" id="password" value="Password"><br>
-  <input type="button" onclick="insertUser(
+  <input type="button" onclick="UserIn(
   document.getElementById('email').value,
   document.getElementById('firstName').value,
   document.getElementById('lastName').value,
   document.getElementById('userType').value,
-  document.getElementById('password').value)" value="Push into parse">
+  document.getElementById('password').value)" 
+  value="Push into parse">
+   <input type="button" onclick="WorkFlowCheckForeign(
+  document.getElementById('email').value,
+  document.getElementById('firstName').value,
+  document.getElementById('lastName').value,
+  document.getElementById('userType').value,
+  document.getElementById('password').value)" 
+  value="CheckFK">
+   <input type="button" onclick="Combine(
+  'WorkflowUser',
+  document.getElementById('email').value,
+  document.getElementById('firstName').value,
+  document.getElementById('lastName').value,
+  document.getElementById('userType').value,
+  document.getElementById('password').value)" 
+  value="Push User">
   <div id="result"></div>
   PullFromParse: <input type="text" id="pull" value="hello" size = 30>
-<<<<<<< HEAD
-  <br><input type ="button" value="Test Print in Box" onclick="pull.value = (getUser('Email', 'Password'))" value="Pull from parse">
-=======
-  <br><input type ="button" value="Test Print in Box" onclick="pull.value = getUser('pushMe', 'Password')" value="Pull from parse">
-  Delete: <input type ="button" value="Delete from Parse" onclick="destroyUser('testemail@yahoo.com', 'pass')">
->>>>>>> 391bbf675438bce91a741341bc8fec125292407c
+  <br>
+  <input type ="button" value="Test Print in Box" onclick="pull.value = (getUser('Email', 'Password'))" value="Pull from parse">
+  <br>
+  <input type = "button" value = "test callback" onclick = "testcallback('hi',testcallback2)">
 
 </body>
 

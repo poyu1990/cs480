@@ -1,4 +1,116 @@
-function insertUser(email,firstName,lastName,userType,password) {
+var sample;
+function Combine(table, email,firstName,lastName,userType,password) {
+  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
+  alert(GenericCheckPrimary(table, "email", email)) // Return undefined
+  if(GenericCheckPrimary(table,"email",email){
+  		  parseObject.save({
+			email: email,
+			Name: firstName,
+			LastName: lastName,
+			UserType: userType,
+			Password: password
+			},
+		{
+			success: function(object) {
+			alert("yay");
+			},
+    error: function(model, error) {
+      alert("nay");
+    }
+  });
+  }
+}
+
+function GenericCheckPrimary(table, column, input) {
+  var parseTable = Parse.Object.extend(table);
+  var parseObject = new parseTable();
+  var query = new Parse.Query(parseTable);
+  query.equalTo(column, input);
+    query.first({
+      success: function(object) {
+        if (object) {
+          alert("Input already exists");
+        } else {
+		  alert("Input does not exist, save");
+		  return true;	  
+        }
+      },
+      error: function(error) {
+        alert("Could not validate uniqueness for this BusStop object.");
+      }
+    });
+}
+/**
+function GenericUserIn(table, email,firstName,lastName,userType,password) {
+  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
+  var parseTable = Parse.Object.extend(table);
+  var parseObject = new parseTable();
+  var query = new Parse.Query(parseTable);
+  query.equalTo("email", email);
+    query.first({
+      success: function(object) {
+        if (object) {
+          alert("User already exists");
+        } else {
+		  alert("User is unique");
+		  parseObject.save({
+			email: email,
+			Name: firstName,
+			LastName: lastName,
+			UserType: userType,
+			Password: password
+			},
+		{
+			success: function(object) {
+			alert("yay");
+			},
+    error: function(model, error) {
+      alert("nay");
+    }
+  });
+        }
+      },
+      error: function(error) {
+        alert("Could not validate uniqueness for this BusStop object.");
+      }
+    });
+}
+**/
+function WorkFlowCheckForeign(email,firstName,lastName,userType,password) {
+  popup();
+  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
+
+  var User = Parse.Object.extend("WorkflowUser");
+  var Workflow = Parse.Object.extend("TestObject");
+  var UserObject = new User();
+  var WorkflowObject = new Workflow();
+  var query = new Parse.Query(User);
+  query.equalTo("email", email);
+    query.first({
+      success: function(object) {
+        if (object) {
+          alert("Found User, Save to WorkflowObject here");
+		  		    WorkflowObject.save({
+    foo: email
+  }, {
+    success: function(object) {
+      alert("yay");
+    },
+    error: function(model, error) {
+      alert("nay");
+    }
+  });
+        } else {
+		  alert("User does not exist. FK not found");
+        }
+      },
+      error: function(error) {
+        alert("Could not validate uniqueness for this BusStop object.");
+      }
+    });
+}
+
+function UserIn(email,firstName,lastName,userType,password) {
   popup();
   Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
 
@@ -11,17 +123,18 @@ function insertUser(email,firstName,lastName,userType,password) {
         if (object) {
           alert("User already exists");
         } else {
-      alert("User is unique");
-        testObject.save({
-    email: email,
-    Name: firstName,
-    LastName: lastName,
-    UserType: userType,
-    Password: password
-  }, {
-    success: function(object) {
-      alert("yay");
-    },
+		  alert("User is unique");
+		  testObject.save({
+			email: email,
+			Name: firstName,
+			LastName: lastName,
+			UserType: userType,
+			Password: password
+			},
+		{
+			success: function(object) {
+			alert("yay");
+			},
     error: function(model, error) {
       alert("nay");
     }
@@ -33,344 +146,21 @@ function insertUser(email,firstName,lastName,userType,password) {
       }
     });
 }
-
-<<<<<<< HEAD
-function updateUser(email, firstName, lastName, userType, password)
-{
-=======
-function destroyUser(email, password){
->>>>>>> 391bbf675438bce91a741341bc8fec125292407c
-  popup();
-  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
-
-  var TestObject = Parse.Object.extend("WorkflowUser");
-  var testObject = new TestObject();
-<<<<<<< HEAD
-  var query = new Parse.Query(TestObject);
-  query.equalTo("email", email);
-    query.first({
-      success: function(results) {
-        results.save(null, {
-          success: function(results) {
-            updateUserEmail(email);
-            updateUserPassword(email, password);
-            updateUserType(email, userType);
-            updateUserFirstName(email, firstName);
-            updateUserLastName(email, lastName);
-            results.save();
-          }
-        });  
-      
-    },
-    error:function(results) {
-      alert("woop");
-    }
-  });
-function updateUserEmail(email)
-{
-  popup();
-  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
-
-  var TestObject = Parse.Object.extend("WorkflowUser");
-  var testObject = new TestObject();
-  var query = new Parse.Query(TestObject);
-  query.equalTo("email", email);
-    query.first({
-      success: function(results) {
-        results.save(null, {
-          success: function(results) {
-            results.set("email", email);
-            results.save();
-          }
-        });  
-    },
-    error:function(results) {
-      alert("woop");
-=======
-  testObject.destroy({
-    success: function(testObject){
-      alert(email + "was deleted.");
-    }
-    error: function(testObject){
-      alert("User was not deleted.");
->>>>>>> 391bbf675438bce91a741341bc8fec125292407c
-    }
-  });
-}
-
-<<<<<<< HEAD
-function updateUserFirstName(email, firstName)
-{
-  popup();
-  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
-
-  var TestObject = Parse.Object.extend("WorkflowUser");
-  var testObject = new TestObject();
-  var query = new Parse.Query(TestObject);
-  query.equalTo("email", email)
-    query.first({
-      success: function(results) {
-        results.save(null, {
-          success: function(results) {
-            results.set("Name", firstName);
-            results.save();
-          }
-        });  
-    },
-    error:function(results) {
-      alert("woop");
-    }
-  });
-}
-function updateUserLastName(email, lastName)
-{
-  popup();
-  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
-
-  var TestObject = Parse.Object.extend("WorkflowUser");
-  var testObject = new TestObject();
-  var query = new Parse.Query(TestObject);
-  query.equalTo("email", email)
-    query.first({
-      success: function(results) {
-        results.save(null, {
-          success: function(results) {
-            results.set("LastName", lastName);
-            results.save();
-          }
-        });  
-    },
-    error:function(results) {
-      alert("woop");
-    }
-  });
-}
-
-function updateUserPassword(email, password)
-=======
-function updateUser(email, firstName, lastName, userType, password)
->>>>>>> 391bbf675438bce91a741341bc8fec125292407c
-{
-  popup();
-  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
-
-  var TestObject = Parse.Object.extend("WorkflowUser");
-  var testObject = new TestObject();
-  var query = new Parse.Query(TestObject);
-  query.equalTo("email", email);
-    query.first({
-      success: function(results) {
-        results.save(null, {
-          success: function(results) {
-<<<<<<< HEAD
-            results.set("Password", password);
-            results.save();
-          }
-        });  
-=======
-            updateUserEmail(email);
-            updateUserPassword(email, password);
-            updateUserType(email, userType);
-            updateUserFirstName(email, firstName);
-            updateUserLastName(email, lastName);
-            results.save();
-          }
-        });  
-      
->>>>>>> 391bbf675438bce91a741341bc8fec125292407c
-    },
-    error:function(results) {
-      alert("woop");
-    }
-  });
-<<<<<<< HEAD
-}
-
-function updateUserType(email, userType)
-{
-  popup();
-  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
-
-  var TestObject = Parse.Object.extend("WorkflowUser");
-  var testObject = new TestObject();
-  var query = new Parse.Query(TestObject);
-  query.equalTo("email", email);
-    query.first({
-      success: function(results) {
-        results.save(null, {
-          success: function(results) {
-            results.set("UserType", userType);
-            results.save();
-          }
-        });  
-    },
-    error:function(results) {
-      alert("woop");
-    }
-  });
-}
-
 function popup() {
   alert("don't push me");
-=======
-function updateUserEmail(email)
-{
-  popup();
-  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
 
-  var TestObject = Parse.Object.extend("WorkflowUser");
-  var testObject = new TestObject();
-  var query = new Parse.Query(TestObject);
-  query.equalTo("email", email);
-    query.first({
-      success: function(results) {
-        results.save(null, {
-          success: function(results) {
-            results.set("email", email);
-            results.save();
-          }
-        });  
-    },
-    error:function(results) {
-      alert("woop");
-    }
-  });
->>>>>>> 391bbf675438bce91a741341bc8fec125292407c
+
 }
-
-function updateUserFirstName(email, firstName)
-{
-  popup();
-  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
-
-  var TestObject = Parse.Object.extend("WorkflowUser");
-  var testObject = new TestObject();
-  var query = new Parse.Query(TestObject);
-  query.equalTo("email", email)
-    query.first({
-      success: function(results) {
-        results.save(null, {
-          success: function(results) {
-            results.set("Name", firstName);
-            results.save();
-          }
-        });  
-    },
-    error:function(results) {
-      alert("woop");
-    }
-  });
-}
-function updateUserLastName(email, lastName)
-{
-  popup();
-  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
-
-  var TestObject = Parse.Object.extend("WorkflowUser");
-  var testObject = new TestObject();
-  var query = new Parse.Query(TestObject);
-  query.equalTo("email", email)
-    query.first({
-      success: function(results) {
-        results.save(null, {
-          success: function(results) {
-            results.set("LastName", lastName);
-            results.save();
-          }
-        });  
-    },
-    error:function(results) {
-      alert("woop");
-    }
-  });
-}
-
-function updateUserPassword(email, password)
-{
-  popup();
-  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
-
-  var TestObject = Parse.Object.extend("WorkflowUser");
-  var testObject = new TestObject();
-  var query = new Parse.Query(TestObject);
-  query.equalTo("email", email);
-    query.first({
-      success: function(results) {
-        results.save(null, {
-          success: function(results) {
-            results.set("Password", password);
-            results.save();
-          }
-        });  
-    },
-    error:function(results) {
-      alert("woop");
-    }
-  });
-}
-
-function updateUserType(email, userType)
-{
-  popup();
-  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
-
-  var TestObject = Parse.Object.extend("WorkflowUser");
-  var testObject = new TestObject();
-  var query = new Parse.Query(TestObject);
-  query.equalTo("email", email);
-    query.first({
-      success: function(results) {
-        results.save(null, {
-          success: function(results) {
-            results.set("UserType", userType);
-            results.save();
-          }
-        });  
-    },
-    error:function(results) {
-      alert("woop");
-    }
-  });
-}
-
-function popup() {
-  alert("don't push me");
-}
-
-function getUser(email,password) {
+function getUserUtil(email,password,callback) {
   popup();
   Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
   var WorkflowUser = Parse.Object.extend("WorkflowUser");
   var query = new Parse.Query(WorkflowUser);
-
   
-  query.equalTo("email", email);
   query.equalTo("Password", password);
   query.find({
     success: function(results) {
-      var object = results[0];
-      alert(object.id);
-      return object.id;
-    },
-    error:function(results) {
-      alert("woop");
-    }
-  });
-}
-/*
-function query(callback) {
-  popup();
-  Parse.initialize("ej29LXB9zHARKwcF5gHhkQ4SnJS7mGwWZ01qrZAa", "jTpvM9KVA9G9XteMyDD4nDcL6xNPVhg44zliTSrw");
-  var WorkflowUser = Parse.Object.extend("WorkflowUser");
-  var query = new Parse.Query(WorkflowUser);
-  var test;
-  query.equalTo("name","tomf");
-  query.find({
-    success: function(results) {
-      var object = results[0];
-      alert(object.get('LastName'));
-      test=object.get('email');
-      document.getElementById('result').innerHTML = object.get('email');
+      console.log(results);
       callback(results);
     },
     error:function(results) {
@@ -378,4 +168,22 @@ function query(callback) {
     }
   });
 }
-*/
+
+var getUserCallback = function(results) {
+  console.log(results);
+  sample = results;
+}
+
+var getUser = function(email,password,callback) {
+    getUserUtil(email,password,callback);
+    console.log("sample is: ");
+    console.log(sample);
+}
+
+var testcallback = function(email, callback) {
+    return callback(email);
+}
+var testcallback2 = function(email) {
+  alert(email);
+  return email+" tom";
+}
